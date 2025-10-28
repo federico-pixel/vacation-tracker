@@ -3,87 +3,91 @@ html, body, #root { height:100%; }
 body{
   margin:0;
   font-family: "Roboto", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-  background:#f1f3f4;                 /* Google auth bg */
+  background:#f1f3f4;
   color:#202124;
 }
 
 /* ===== Centering ===== */
 .gate{
-  min-height:100vh;
-  min-height:100dvh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
+  min-height:100vh; min-height:100dvh;
+  display:flex; align-items:center; justify-content:center;
+  padding:32px;
 }
 
-/* ===== Card ===== */
+/* ===== Sheet (wide) ===== */
 .card.google-like{
-  width:min(520px, 94vw);             /* real chooser width */
+  width:min(1120px, 96vw);            /* wide like the real chooser */
   background:#fff;
-  border-radius:28px;
+  border-radius:40px;
   border:1px solid rgba(0,0,0,.08);
-  box-shadow:0 1px 2px rgba(60,64,67,.3), 0 2px 6px rgba(60,64,67,.15);
-  padding:32px 40px 28px;             /* L/R padding 40 */
-  box-sizing:border-box;
+  box-shadow:0 1px 2px rgba(60,64,67,.3), 0 4px 12px rgba(60,64,67,.15);
+  overflow:hidden;
   text-align:left;
 }
 
-/* ===== Header ===== */
-.header{ margin-bottom:22px; }
-.g-icon{ width:36px; height:36px; margin-bottom:14px; }
+/* ===== Top header bar ===== */
+.sheet-head{
+  display:flex; align-items:center; gap:12px;
+  height:56px;
+  padding:0 28px;
+  border-bottom:1px solid #dadce0;
+}
+.head-gmark{ display:block; }
+.head-text{ font-size:18px; color:#3c4043; }
 
-h1{
-  margin:0 0 4px 0;
-  font-size:26px;                     /* slightly smaller than 28 */
-  font-weight:500;                    /* Google weight */
-  letter-spacing:.1px;
-  line-height:1.25;
+/* ===== Two-column body ===== */
+.sheet-body{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:24px;
+  padding:40px 48px 36px;
+  box-sizing:border-box;
+}
+@media (max-width: 900px){
+  .sheet-body{ grid-template-columns: 1fr; }
 }
 
-.sub{
+/* ===== Left column ===== */
+.col-left{ padding-right:32px; }
+.g-icon.big{ width:64px; height:64px; margin:8px 0 20px; }
+.headline{
+  margin:0 0 16px 0;
+  font-size:56px;                     /* large headline like screenshot */
+  line-height:1.1;
+  font-weight:400;
+}
+.sub-lg{
   margin:0;
   color:#5f6368;
-  font-size:14px;
-  line-height:1.45;
+  font-size:22px;
 }
-
-.brand-link{
-  color:#1a73e8;
-  font-weight:500;
-  text-decoration:none;
-}
+.brand-link{ color:#1a73e8; font-weight:500; text-decoration:none; }
 .brand-link:hover{ text-decoration:underline; }
 
-/* ===== Button block ===== */
-.g-btn{
-  display:flex;
-  justify-content:flex-start;         /* left-aligned button */
-  margin:26px 0 22px;
-}
+/* ===== Right column ===== */
+.col-right{ align-self:start; }
+.g-btn{ display:inline-block; }       /* GIS button */
+.divider{ height:1px; background:#e0e3e7; margin:28px 0; }
 
-/* ===== Divider + footer ===== */
-.footer{
-  border-top:1px solid #dadce0;
-  padding-top:14px;
-  margin-top:2px;                     /* tight like Google */
+/* Faux list row (Use another account) */
+.row.faux{
+  display:flex; align-items:center; gap:12px;
+  padding:14px 6px;
+  border-radius:12px;
 }
-.meta{
-  margin:0;
-  color:#5f6368;
-  font-size:13px;
-  line-height:1.5;
-}
+.row.faux:hover{ background:#f7f8f8; }
+.row.faux .ico{ width:24px; height:24px; display:grid; place-items:center; }
+.row-label{ font-size:18px; color:#1f1f1f; }
+
+/* Footer text (inside right column) */
+.meta{ margin:0; color:#5f6368; font-size:16px; line-height:1.6; }
 .meta a{ color:#1a73e8; text-decoration:none; }
 .meta a:hover{ text-decoration:underline; }
+.top-pad{ margin-top:6px; }
 
 /* ===== Error (if shown) ===== */
 .err{
-  margin-top:12px;
-  color:#b3261e;
-  background:#fce8e6;
-  border:1px solid #f7c5c1;
-  padding:8px 10px;
-  border-radius:8px;
-  font-size:13px;
+  margin:16px 48px 28px;
+  color:#b3261e; background:#fce8e6; border:1px solid #f7c5c1;
+  padding:10px 12px; border-radius:10px; font-size:14px;
 }
