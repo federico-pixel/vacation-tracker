@@ -16,7 +16,7 @@ body{
 
 /* ===== Sheet (normal scale) ===== */
 .card.google-like{
-  width:min(980px, 96vw);              /* ⬅️ smaller overall width */
+  width:min(980px, 96vw);
   background:#fff;
   border-radius:28px;
   border:1px solid rgba(0,0,0,.08);
@@ -28,8 +28,8 @@ body{
 /* ===== Top header bar ===== */
 .sheet-head{
   display:flex; align-items:center; gap:10px;
-  height:52px;                         /* ⬅️ shorter top bar */
-  padding:0 24px;                      /* ⬅️ tighter padding */
+  height:52px;
+  padding:0 24px;
   border-bottom:1px solid #dadce0;
 }
 .head-gmark{ display:block; }
@@ -38,21 +38,21 @@ body{
 /* ===== Two-column body ===== */
 .sheet-body{
   display:grid;
-  grid-template-columns: 1fr 1fr;      /* balanced columns */
+  grid-template-columns: 1fr 1fr;
   gap:20px;
-  padding:32px 36px 28px;              /* ⬅️ tighter paddings */
+  padding:32px 36px 28px;
   box-sizing:border-box;
 }
 @media (max-width: 900px){
   .sheet-body{ grid-template-columns: 1fr; }
 }
 
-/* ===== Left column (logo + headline) ===== */
+/* ===== Left column ===== */
 .col-left{ padding-right:24px; }
-.g-icon.big{ width:48px; height:48px; margin:6px 0 16px; }   /* ⬅️ smaller logo */
+.g-icon.big{ width:48px; height:48px; margin:6px 0 16px; }
 .headline{
   margin:0 0 12px 0;
-  font-size:40px;                       /* ⬅️ reduced headline size */
+  font-size:40px;
   line-height:1.15;
   font-weight:400;
   letter-spacing:.15px;
@@ -60,38 +60,62 @@ body{
 .sub-lg{
   margin:0;
   color:#5f6368;
-  font-size:16px;                       /* ⬅️ normal body size */
+  font-size:16px;
   line-height:1.45;
 }
 .brand-link{ color:#1a73e8; font-weight:500; text-decoration:none; }
 .brand-link:hover{ text-decoration:underline; }
 
 /* ===== Right column ===== */
-.col-right{ align-self:start; max-width:480px; }              /* ⬅️ narrower right side */
+.col-right{ align-self:start; max-width:480px; }
 
-/* Make the GIS button look like the compact chip */
-.account-chip{
-  display:inline-flex; align-items:center;
-  padding:6px 8px;                      /* ⬅️ smaller chip */
+/* --- Account row that matches Google --- */
+.btn-overlay{ position:relative; display:inline-block; }
+
+.account-row{
+  display:flex; align-items:center; gap:12px;
+  padding:10px 12px;
   border:1px solid #dadce0;
-  border-radius:10px;
+  border-radius:12px;
   background:#fff;
-  box-shadow:0 1px 2px rgba(0,0,0,0.06);
+  box-shadow:0 1px 2px rgba(0,0,0,.06);
+  min-width:420px;
 }
+.account-row:hover{ box-shadow:0 1px 3px rgba(0,0,0,.12); }
+
+.avatar{
+  width:40px; height:40px; border-radius:50%;
+  object-fit:cover; flex:0 0 auto;
+}
+.row-main{ display:flex; flex-direction:column; min-width:0; }
+.acct-name{ font-size:16px; line-height:1.3; color:#1f1f1f; font-weight:500; }
+.acct-email{
+  font-size:14px; color:#5f6368; line-height:1.25;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.g-mark{ margin-left:auto; opacity:.9; }
+
+/* Real Google button placed invisibly over the row (keeps auth behavior) */
 .g-btn{ display:inline-block; }
+.g-overlay{
+  position:absolute; inset:0;
+  opacity:0;
+  transform:none !important;
+  pointer-events:auto;
+}
 
 /* separators + faux row */
-.divider{ height:1px; background:#e0e3e7; margin:20px 0; }   /* ⬅️ tighter spacing */
+.divider{ height:1px; background:#e0e3e7; margin:20px 0; }
 .row.faux{
   display:flex; align-items:center; gap:10px;
-  padding:10px 4px;                     /* ⬅️ smaller row */
+  padding:10px 4px;
   border-radius:10px;
 }
 .row.faux:hover{ background:#f7f8f8; }
 .row.faux .ico{ width:22px; height:22px; display:grid; place-items:center; }
-.row-label{ font-size:16px; color:#1f1f1f; }                  /* ⬅️ normal text size */
+.row-label{ font-size:16px; color:#1f1f1f; }
 
-/* footer text (right column) */
+/* footer text */
 .meta{ margin:0; color:#5f6368; font-size:14px; line-height:1.55; }
 .meta a{ color:#1a73e8; text-decoration:none; }
 .meta a:hover{ text-decoration:underline; }
