@@ -10,7 +10,7 @@ export default function App() {
     typeof window !== "undefined" && window.location.pathname === "/landing";
 
   useEffect(() => {
-    if (isLanding) return; // Don't init GIS on the landing page
+    if (isLanding) return; // don't init GIS on the landing page
 
     function setup() {
       /* global google */
@@ -23,13 +23,15 @@ export default function App() {
             return;
           }
           if (!isAllowedEmail(payload.email)) {
-            setError("Only Hostfully accounts on the test list can access this preview.");
+            setError(
+              "Only Hostfully accounts on the test list can access this preview."
+            );
             return;
           }
-          // ✅ Redirect to the phishing-test landing page
+          // redirect to the phishing-test landing page
           window.location.href = "/landing";
         },
-        ux_mode: "popup"
+        ux_mode: "popup",
       });
 
       google.accounts.id.renderButton(btnRef.current, {
@@ -38,7 +40,7 @@ export default function App() {
         shape: "rectangular",
         text: "signin_with",
         logo_alignment: "left",
-        width: 320
+        width: 320,
       });
     }
 
@@ -55,54 +57,88 @@ export default function App() {
     }
   }, [isLanding]);
 
-  // If we're on /landing, show the phishing-test page
+  // /landing route
   if (isLanding) {
     return <Landing />;
   }
 
-  // Default: Google-like sign-in screen
+  // default: wide, two-column Google-like chooser
   return (
     <div className="gate">
       <div className="card google-like">
-        <div className="header">
+        {/* top header bar */}
+        <div className="sheet-head">
           <img
-            className="g-icon"
-            src="https://vacationtracker.io/static/img/logomark.png"
-            alt="Vacation Tracker logo"
-            width="40"
-            height="40"
+            className="head-gmark"
+            src="https://www.gstatic.com/images/branding/googleg/1x/googleg_standard_color_24dp.png"
+            alt=""
+            width="20"
+            height="20"
           />
-          <h1>Choose an account</h1>
-          <p className="sub">
-            to continue to <span className="brand-link">Vacation Tracker</span>
-          </p>
+          <span className="head-text">Sign in with Google</span>
         </div>
 
-        <div ref={btnRef} className="g-btn" />
+        {/* two-column body */}
+        <div className="sheet-body">
+          {/* left column */}
+          <div className="col-left">
+            <img
+              className="g-icon big"
+              src="https://vacationtracker.io/static/img/logomark.png"
+              alt="Vacation Tracker"
+              width="56"
+              height="56"
+            />
+            <h1 className="headline">Choose an account</h1>
+            <p className="sub-lg">
+              to continue to <span className="brand-link">Vacation Tracker</span>
+            </p>
+          </div>
 
+          {/* right column */}
+          <div className="col-right">
+            {/* real GIS button (auth) */}
+            <div className="g-btn" ref={btnRef} />
+
+            <div className="divider" />
+            <div className="row faux" role="button" aria-label="Use another account">
+              <div className="ico" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="8" r="3.5" stroke="#5f6368" />
+                  <path
+                    d="M4 20c.6-3.9 4-6.5 8-6.5s7.4 2.6 8 6.5"
+                    stroke="#5f6368"
+                  />
+                </svg>
+              </div>
+              <div className="row-label">Use another account</div>
+            </div>
+            <div className="divider" />
+
+            <p className="meta top-pad">
+              Before using this app, you can review Vacation Tracker’s{" "}
+              <a
+                href="https://vacationtracker.io/privacy-policy"
+                target="_blank"
+                rel="noreferrer"
+              >
+                privacy policy
+              </a>{" "}
+              and{" "}
+              <a
+                href="https://vacationtracker.io/terms-of-service"
+                target="_blank"
+                rel="noreferrer"
+              >
+                terms of service
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+
+        {/* error (if any) */}
         {error && <div className="err">{error}</div>}
-
-        <div className="footer">
-          <p className="meta">
-            Before using this app, you can review Vacation Tracker’s{" "}
-            <a
-              href="https://vacationtracker.io/privacy-policy"
-              target="_blank"
-              rel="noreferrer"
-            >
-              privacy policy
-            </a>{" "}
-            and{" "}
-            <a
-              href="https://vacationtracker.io/terms-of-service"
-              target="_blank"
-              rel="noreferrer"
-            >
-              terms of service
-            </a>
-            .
-          </p>
-        </div>
       </div>
     </div>
   );
