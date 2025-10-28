@@ -96,44 +96,64 @@ export default function App() {
           </div>
 
           {/* right column */}
-            <div className="col-right">
-              <div className="account-chip">
-                <div className="g-btn" ref={btnRef} />
-              </div>
-            
-              <div className="divider" />
-              <div className="row faux" role="button" aria-label="Use another account">
-                <div className="ico" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="8" r="3.5" stroke="#5f6368" />
-                    <path d="M4 20c.6-3.9 4-6.5 8-6.5s7.4 2.6 8 6.5" stroke="#5f6368"/>
-                  </svg>
+          <div className="col-right">
+            {/* Account row with invisible GIS button overlay */}
+            <div className="btn-overlay">
+              <div className="account-row" role="button" aria-label="Sign in as account">
+                <img
+                  className="avatar"
+                  src={import.meta.env.VITE_ACCOUNT_AVATAR || "https://i.pravatar.cc/96"}
+                  alt=""
+                  width="40"
+                  height="40"
+                />
+                <div className="row-main">
+                  <div className="acct-name">
+                    {import.meta.env.VITE_ACCOUNT_NAME || "Federico Dominguez"}
+                  </div>
+                  <div className="acct-email">
+                    {import.meta.env.VITE_ACCOUNT_EMAIL || "federico@hostfully.com"}
+                  </div>
                 </div>
-                <div className="row-label">Use another account</div>
+                <img
+                  className="g-mark"
+                  src="https://www.gstatic.com/images/branding/googleg/1x/googleg_standard_color_24dp.png"
+                  alt=""
+                  width="18"
+                  height="18"
+                />
               </div>
-              <div className="divider" />
-
+          
+              {/* real Google button, invisible but clickable */}
+              <div className="g-btn g-overlay" ref={btnRef} />
+            </div>
+          
+            <div className="divider" />
+          
+            <div className="row faux" role="button" aria-label="Use another account">
+              <div className="ico" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="8" r="3.5" stroke="#5f6368" />
+                  <path d="M4 20c.6-3.9 4-6.5 8-6.5s7.4 2.6 8 6.5" stroke="#5f6368" />
+                </svg>
+              </div>
+              <div className="row-label">Use another account</div>
+            </div>
+          
+            <div className="divider" />
+          
             <p className="meta top-pad">
               Before using this app, you can review Vacation Tracker’s{" "}
-              <a
-                href="https://vacationtracker.io/privacy-policy"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="https://vacationtracker.io/privacy-policy" target="_blank" rel="noreferrer">
                 privacy policy
               </a>{" "}
               and{" "}
-              <a
-                href="https://vacationtracker.io/terms-of-service"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="https://vacationtracker.io/terms-of-service" target="_blank" rel="noreferrer">
                 terms of service
-              </a>
-              .
+              </a>.
             </p>
           </div>
-        </div>
+
 
         {/* error (if any) */}
         {error && <div className="err">{error}</div>}
