@@ -10,7 +10,7 @@ export default function App() {
     typeof window !== "undefined" && window.location.pathname === "/landing";
 
   useEffect(() => {
-    if (isLanding) return; // don't init GIS on the landing page
+    if (isLanding) return; // don't init GIS on landing page
 
     function setup() {
       /* global google */
@@ -28,12 +28,13 @@ export default function App() {
             );
             return;
           }
-          // redirect to the phishing-test landing page
+          // Redirect to phishing-test landing page
           window.location.href = "/landing";
         },
         ux_mode: "popup",
       });
 
+      // Render official Google button (we may overlay it invisibly)
       google.accounts.id.renderButton(btnRef.current, {
         theme: "outline",
         size: "large",
@@ -62,11 +63,11 @@ export default function App() {
     return <Landing />;
   }
 
-  // default: wide, two-column Google-like chooser
+  // Default: Google-like chooser
   return (
     <div className="gate">
       <div className="card google-like">
-        {/* top header bar */}
+        {/* Top header bar */}
         <div className="sheet-head">
           <img
             className="head-gmark"
@@ -78,9 +79,9 @@ export default function App() {
           <span className="head-text">Sign in with Google</span>
         </div>
 
-        {/* two-column body */}
+        {/* Two-column body */}
         <div className="sheet-body">
-          {/* left column */}
+          {/* Left column */}
           <div className="col-left">
             <img
               className="g-icon big"
@@ -91,18 +92,25 @@ export default function App() {
             />
             <h1 className="headline">Choose an account</h1>
             <p className="sub-lg">
-              to continue to <span className="brand-link">Vacation Tracker</span>
+              to continue to{" "}
+              <span className="brand-link">Vacation Tracker</span>
             </p>
           </div>
 
-          {/* right column */}
+          {/* Right column */}
           <div className="col-right">
-            {/* Account row with invisible GIS button overlay */}
+            {/* Account row with invisible Google button overlay */}
             <div className="btn-overlay">
-              <div className="account-row" role="button" aria-label="Sign in as account">
+              <div
+                className="account-row"
+                role="button"
+                aria-label="Sign in as account"
+              >
                 <img
                   className="avatar"
-                  src={import.meta.env.VITE_ACCOUNT_AVATAR || "https://i.pravatar.cc/96"}
+                  src={
+                    import.meta.env.VITE_ACCOUNT_AVATAR || "https://i.pravatar.cc/96"
+                  }
                   alt=""
                   width="40"
                   height="40"
@@ -123,39 +131,51 @@ export default function App() {
                   height="18"
                 />
               </div>
-          
-              {/* real Google button, invisible but clickable */}
+
+              {/* Real Google button (clickable, visually hidden) */}
               <div className="g-btn g-overlay" ref={btnRef} />
             </div>
-          
+
             <div className="divider" />
-          
+
             <div className="row faux" role="button" aria-label="Use another account">
               <div className="ico" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                   <circle cx="12" cy="8" r="3.5" stroke="#5f6368" />
-                  <path d="M4 20c.6-3.9 4-6.5 8-6.5s7.4 2.6 8 6.5" stroke="#5f6368" />
+                  <path
+                    d="M4 20c.6-3.9 4-6.5 8-6.5s7.4 2.6 8 6.5"
+                    stroke="#5f6368"
+                  />
                 </svg>
               </div>
               <div className="row-label">Use another account</div>
             </div>
-          
+
             <div className="divider" />
-          
+
             <p className="meta top-pad">
               Before using this app, you can review Vacation Tracker’s{" "}
-              <a href="https://vacationtracker.io/privacy-policy" target="_blank" rel="noreferrer">
+              <a
+                href="https://vacationtracker.io/privacy-policy"
+                target="_blank"
+                rel="noreferrer"
+              >
                 privacy policy
               </a>{" "}
               and{" "}
-              <a href="https://vacationtracker.io/terms-of-service" target="_blank" rel="noreferrer">
+              <a
+                href="https://vacationtracker.io/terms-of-service"
+                target="_blank"
+                rel="noreferrer"
+              >
                 terms of service
-              </a>.
+              </a>
+              .
             </p>
           </div>
+        </div>
 
-
-        {/* error (if any) */}
+        {/* Error (if any) */}
         {error && <div className="err">{error}</div>}
       </div>
     </div>
