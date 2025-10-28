@@ -27,11 +27,11 @@ export default function App() {
       google.accounts.id.renderButton(btnRef.current, {
         theme: "outline",
         size: "large",
-        shape: "pill",
-        text: "signin_with",        // was: "continue_with"
-        logo_alignment: "left"
+        shape: "rectangular",
+        text: "signin_with",      // official GIS text
+        logo_alignment: "left",
+        width: 320               // keeps layout crisp
       });
-
     }
 
     if (window.google?.accounts?.id) setup();
