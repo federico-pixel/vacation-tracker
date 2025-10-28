@@ -79,9 +79,25 @@ export default function App() {
         <div className="footer">
           <p className="meta">
             Before using this app, you can review Vacation Tracker’s{" "}
-            <a href="https://vacationtracker.io/privacy-policy" target="_blank" rel="noreferrer">
+            <a
+              href="https://vacationtracker.io/privacy-policy"
+              target="_blank"
+              rel="noreferrer"
+            >
               privacy policy
             </a>{" "}
             and{" "}
-            <a href="https://vacationtracker.io/terms-of-service" target="_blank" rel="noreferrer">
+            <a
+              href="https://vacationtracker.io/terms-of-service"
+              target="_blank"
+              rel="noreferrer"
+            >
               terms of service
+            </a>
+            .
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
