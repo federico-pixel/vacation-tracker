@@ -44,20 +44,36 @@ export default function App() {
   }, []);
 
   return (
-          <div className="card">
-            <div className="brand">Vacation Tracker</div>
-            <h1>Sign in with Google</h1>
-            <p className="sub">
-              Use your Hostfully Google account to continue. You’ll be redirected after sign-in.
-            </p>
+          <div className="card google-like">
+  <img
+    className="g-logo"
+    src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png"
+    alt="Google"
+    width="48"
+    height="48"
+    loading="eager"
+  />
 
-            <div ref={btnRef} style={{ display: "inline-block", marginTop: 12 }} />
+  <h1 className="g-title">Sign in</h1>
 
-            {error && <div className="err">{error}</div>}
+  <p className="g-sub">
+    Continue to <strong>Vacation&nbsp;Tracker</strong>
+  </p>
 
-            <div className="meta">
-              This preview is limited to test users while the app is in Google’s “Testing” mode.
-            </div>
-          </div>
+  <div ref={btnRef} className="g-btn"></div>
+
+  {error && <div className="err">{error}</div>}
+
+  <div className="g-footer">
+    <a className="g-link" href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">
+      Privacy
+    </a>
+    <span aria-hidden="true">·</span>
+    <a className="g-link" href="https://policies.google.com/terms" target="_blank" rel="noreferrer">
+      Terms
+    </a>
+  </div>
+</div>
+
   );
 }
