@@ -25,13 +25,14 @@ export default function App() {
         ux_mode: "popup"
       });
 
+      // ✅ Official Google button style
       google.accounts.id.renderButton(btnRef.current, {
         theme: "outline",
         size: "large",
         shape: "rectangular",
-        text: "signin_with",      // official GIS text
+        text: "signin_with",
         logo_alignment: "left",
-        width: 320               // keeps layout crisp
+        width: 320
       });
     }
 
@@ -52,31 +53,10 @@ export default function App() {
       <div className="card google-like">
         {/* Header (Google-like) */}
         <div className="header">
-          {/* Place vt-icon.png in /public so this path works */}
-          <img className="g-icon" src="/vt-icon.png" alt="Vacation Tracker logo" width="40" height="40" />
-
-          <h1>Choose an account</h1>
-
-          <p className="sub">
-            to continue to <span className="brand-link">Vacation Tracker</span>
-          </p>
-        </div>
-
-        {/* Official Google Sign-In button */}
-        <div ref={btnRef} className="g-btn" />
-
-        {/* Error display */}
-        {error && <div className="err">{error}</div>}
-
-        {/* Footer (Google-like) */}
-        <div className="footer">
-          <p className="meta">
-            Before using this app, you can review Vacation Tracker’s{" "}
-            <a href="#" rel="noreferrer">privacy policy</a> and{" "}
-            <a href="#" rel="noreferrer">terms of service</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
+          {/* Vacation Tracker logo */}
+          <img
+            className="g-icon"
+            src="https://vacationtracker.io/static/img/logomark.png"
+            alt="Vacation Tracker logo"
+            width="40"
+            height="40"
