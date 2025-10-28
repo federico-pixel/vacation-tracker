@@ -28,13 +28,12 @@ export default function App() {
             );
             return;
           }
-          // Redirect to phishing-test landing page
           window.location.href = "/landing";
         },
         ux_mode: "popup",
       });
 
-      // Render official Google button (we may overlay it invisibly)
+      // Render official Google button (overlaid invisibly on the account row)
       google.accounts.id.renderButton(btnRef.current, {
         theme: "outline",
         size: "large",
@@ -58,12 +57,10 @@ export default function App() {
     }
   }, [isLanding]);
 
-  // /landing route
   if (isLanding) {
     return <Landing />;
   }
 
-  // Default: Google-like chooser
   return (
     <div className="gate">
       <div className="card google-like">
@@ -92,8 +89,7 @@ export default function App() {
             />
             <h1 className="headline">Choose an account</h1>
             <p className="sub-lg">
-              to continue to{" "}
-              <span className="brand-link">Vacation Tracker</span>
+              to continue to <span className="brand-link">Vacation Tracker</span>
             </p>
           </div>
 
@@ -106,23 +102,41 @@ export default function App() {
                 role="button"
                 aria-label="Sign in as account"
               >
-                <img
-                  className="avatar"
-                  src={
-                    import.meta.env.VITE_ACCOUNT_AVATAR || "https://i.pravatar.cc/96"
-                  }
-                  alt=""
-                  width="40"
-                  height="40"
-                />
+                {/* Avatar: env override or neutral silhouette */}
+                {import.meta.env.VITE_ACCOUNT_AVATAR ? (
+                  <img
+                    className="avatar"
+                    src={import.meta.env.VITE_ACCOUNT_AVATAR}
+                    alt=""
+                    width="40"
+                    height="40"
+                  />
+                ) : (
+                  <svg
+                    className="avatar"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                  >
+                    <circle cx="20" cy="20" r="20" fill="#E8EAED" />
+                    <circle cx="20" cy="16.5" r="7" fill="#BDC1C6" />
+                    <path
+                      d="M8 33c1.2-6.5 6.4-10 12-10s10.8 3.5 12 10"
+                      fill="#BDC1C6"
+                    />
+                  </svg>
+                )}
+
                 <div className="row-main">
                   <div className="acct-name">
                     {import.meta.env.VITE_ACCOUNT_NAME || "Federico Dominguez"}
                   </div>
                   <div className="acct-email">
-                    {import.meta.env.VITE_ACCOUNT_EMAIL || "federico@hostfully.com"}
+                    {import.meta.env.VITE_ACCOUNT_EMAIL ||
+                      "federico@hostfully.com"}
                   </div>
                 </div>
+
                 <img
                   className="g-mark"
                   src="https://www.gstatic.com/images/branding/googleg/1x/googleg_standard_color_24dp.png"
@@ -132,7 +146,7 @@ export default function App() {
                 />
               </div>
 
-              {/* Real Google button (clickable, visually hidden) */}
+              {/* Real Google button (clickable, visually hidden via CSS) */}
               <div className="g-btn g-overlay" ref={btnRef} />
             </div>
 
