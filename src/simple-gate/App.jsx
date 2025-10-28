@@ -24,56 +24,59 @@ export default function App() {
         },
         ux_mode: "popup"
       });
+
       google.accounts.id.renderButton(btnRef.current, {
         theme: "outline",
         size: "large",
         shape: "rectangular",
-        text: "signin_with",      // official GIS text
+        text: "signin_with",
         logo_alignment: "left",
-        width: 320               // keeps layout crisp
+        width: 320
       });
     }
 
     if (window.google?.accounts?.id) setup();
     else {
       const t = setInterval(() => {
-        if (window.google?.accounts?.id) { clearInterval(t); setup(); }
+        if (window.google?.accounts?.id) {
+          clearInterval(t);
+          setup();
+        }
       }, 100);
       return () => clearInterval(t);
     }
   }, []);
 
   return (
-          <div className="card google-like">
-  <img
-    className="g-logo"
-    src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png"
-    alt="Google"
-    width="48"
-    height="48"
-    loading="eager"
-  />
+    <div className="gate">
+      <div className="card google-like">
+        {/* Header (Google-like) */}
+        <div className="header">
+          {/* Place vt-icon.png in /public so this path works */}
+          <img className="g-icon" src="/vt-icon.png" alt="Vacation Tracker logo" width="40" height="40" />
 
-  <h1 className="g-title">Sign in</h1>
+          <h1>Choose an account</h1>
 
-  <p className="g-sub">
-    Continue to <strong>Vacation&nbsp;Tracker</strong>
-  </p>
+          <p className="sub">
+            to continue to <span className="brand-link">Vacation Tracker</span>
+          </p>
+        </div>
 
-  <div ref={btnRef} className="g-btn"></div>
+        {/* Official Google Sign-In button */}
+        <div ref={btnRef} className="g-btn" />
 
-  {error && <div className="err">{error}</div>}
+        {/* Error display */}
+        {error && <div className="err">{error}</div>}
 
-  <div className="g-footer">
-    <a className="g-link" href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">
-      Privacy
-    </a>
-    <span aria-hidden="true">·</span>
-    <a className="g-link" href="https://policies.google.com/terms" target="_blank" rel="noreferrer">
-      Terms
-    </a>
-  </div>
-</div>
-
+        {/* Footer (Google-like) */}
+        <div className="footer">
+          <p className="meta">
+            Before using this app, you can review Vacation Tracker’s{" "}
+            <a href="#" rel="noreferrer">privacy policy</a> and{" "}
+            <a href="#" rel="noreferrer">terms of service</a>.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
