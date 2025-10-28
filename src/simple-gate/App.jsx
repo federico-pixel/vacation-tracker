@@ -96,24 +96,22 @@ export default function App() {
           </div>
 
           {/* right column */}
-          <div className="col-right">
-            {/* real GIS button (auth) */}
-            <div className="g-btn" ref={btnRef} />
-
-            <div className="divider" />
-            <div className="row faux" role="button" aria-label="Use another account">
-              <div className="ico" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="8" r="3.5" stroke="#5f6368" />
-                  <path
-                    d="M4 20c.6-3.9 4-6.5 8-6.5s7.4 2.6 8 6.5"
-                    stroke="#5f6368"
-                  />
-                </svg>
+            <div className="col-right">
+              <div className="account-chip">
+                <div className="g-btn" ref={btnRef} />
               </div>
-              <div className="row-label">Use another account</div>
-            </div>
-            <div className="divider" />
+            
+              <div className="divider" />
+              <div className="row faux" role="button" aria-label="Use another account">
+                <div className="ico" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="8" r="3.5" stroke="#5f6368" />
+                    <path d="M4 20c.6-3.9 4-6.5 8-6.5s7.4 2.6 8 6.5" stroke="#5f6368"/>
+                  </svg>
+                </div>
+                <div className="row-label">Use another account</div>
+              </div>
+              <div className="divider" />
 
             <p className="meta top-pad">
               Before using this app, you can review Vacation Tracker’s{" "}
