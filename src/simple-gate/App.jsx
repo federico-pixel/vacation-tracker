@@ -29,9 +29,9 @@ export default function App() {
         theme: "outline",
         size: "large",
         shape: "rectangular",
-        text: "signin_with",
+        text: "signin_with",      // official GIS text
         logo_alignment: "left",
-        width: 320
+        width: 320               // keeps layout crisp
       });
     }
 
