@@ -70,9 +70,10 @@ body{
 .col-right{ align-self:start; max-width:480px; }
 
 /* --- Account row that matches Google --- */
-.btn-overlay{ position:relative; display:inline-block; }
+.btn-overlay{ position:relative; display:block; width:100%; }
 
 .account-row{
+  position:relative;
   display:flex; align-items:center; gap:12px;
   padding:10px 12px;
   border:1px solid #dadce0;
@@ -83,6 +84,7 @@ body{
 }
 .account-row:hover{ box-shadow:0 1px 3px rgba(0,0,0,.12); }
 
+/* avatar (img or svg) */
 .avatar{
   width:40px; height:40px; border-radius:50%;
   object-fit:cover; flex:0 0 auto;
@@ -95,13 +97,18 @@ body{
 }
 .g-mark{ margin-left:auto; opacity:.9; }
 
-/* Real Google button placed invisibly over the row (keeps auth behavior) */
+/* Real Google button stretched invisibly over the whole row */
 .g-btn{ display:inline-block; }
 .g-overlay{
   position:absolute; inset:0;
-  opacity:0;
-  transform:none !important;
+  z-index:10;
+  opacity:0;                           /* visually hidden, still clickable */
   pointer-events:auto;
+}
+.g-overlay > div,
+.g-overlay iframe{
+  width:100% !important;
+  height:100% !important;
 }
 
 /* separators + faux row */
