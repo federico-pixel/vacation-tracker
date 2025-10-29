@@ -1,3 +1,4 @@
+// src/simple-gate/App.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { decodeGoogleCredential, isAllowedEmail } from "./auth";
 import Landing from "./Landing";
@@ -10,7 +11,7 @@ export default function App() {
     typeof window !== "undefined" && window.location.pathname === "/landing";
 
   useEffect(() => {
-    if (isLanding) return; // don't init GIS on landing page
+    if (isLanding) return; // don't init GIS on the landing page
 
     function setup() {
       /* global google */
@@ -28,12 +29,13 @@ export default function App() {
             );
             return;
           }
+          // success -> go to landing page
           window.location.href = "/landing";
         },
         ux_mode: "popup",
       });
 
-      // Render official Google button (overlaid invisibly on the account row)
+      // render the official Google button (no overlays/custom rows)
       google.accounts.id.renderButton(btnRef.current, {
         theme: "outline",
         size: "large",
@@ -57,10 +59,10 @@ export default function App() {
     }
   }, [isLanding]);
 
-  if (isLanding) {
-    return <Landing />;
-  }
+  // phishing-test landing page
+  if (isLanding) return <Landing />;
 
+  // Google-like shell + real Google button
   return (
     <div className="gate">
       <div className="card google-like">
@@ -76,7 +78,7 @@ export default function App() {
           <span className="head-text">Sign in with Google</span>
         </div>
 
-        {/* Two-column body */}
+        {/* Body */}
         <div className="sheet-body">
           {/* Left column */}
           <div className="col-left">
@@ -93,66 +95,15 @@ export default function App() {
             </p>
           </div>
 
-          {/* Right column */}
+          {/* Right column: ONLY the official Google button */}
           <div className="col-right">
-            {/* Account row with invisible Google button overlay */}
-            <div className="btn-overlay">
-              <div
-                className="account-row"
-                role="button"
-                aria-label="Sign in as account"
-              >
-                {/* Avatar: env override or neutral silhouette */}
-                {import.meta.env.VITE_ACCOUNT_AVATAR ? (
-                  <img
-                    className="avatar"
-                    src={import.meta.env.VITE_ACCOUNT_AVATAR}
-                    alt=""
-                    width="40"
-                    height="40"
-                  />
-                ) : (
-                  <svg
-                    className="avatar"
-                    width="40"
-                    height="40"
-                    viewBox="0 0 40 40"
-                  >
-                    <circle cx="20" cy="20" r="20" fill="#E8EAED" />
-                    <circle cx="20" cy="16.5" r="7" fill="#BDC1C6" />
-                    <path
-                      d="M8 33c1.2-6.5 6.4-10 12-10s10.8 3.5 12 10"
-                      fill="#BDC1C6"
-                    />
-                  </svg>
-                )}
-
-                <div className="row-main">
-                  <div className="acct-name">
-                    {import.meta.env.VITE_ACCOUNT_NAME || "Federico Dominguez"}
-                  </div>
-                  <div className="acct-email">
-                    {import.meta.env.VITE_ACCOUNT_EMAIL ||
-                      "federico@hostfully.com"}
-                  </div>
-                </div>
-
-                <img
-                  className="g-mark"
-                  src="https://www.gstatic.com/images/branding/googleg/1x/googleg_standard_color_24dp.png"
-                  alt=""
-                  width="18"
-                  height="18"
-                />
-              </div>
-
-              {/* Real Google button (clickable, visually hidden via CSS) */}
-              <div className="g-btn g-overlay" ref={btnRef} />
+            <div className="account-chip">
+              <div ref={btnRef} className="g-btn" />
             </div>
 
+            {/* optional divider + static row; not clickable to avoid conflicts */}
             <div className="divider" />
-
-            <div className="row faux" role="button" aria-label="Use another account">
+            <div className="row faux" aria-hidden="true">
               <div className="ico" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                   <circle cx="12" cy="8" r="3.5" stroke="#5f6368" />
